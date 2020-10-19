@@ -2,7 +2,7 @@ import random
 from math import floor
 
 
-def split_train_test(image_paths, train_ratio, validation_ratio):
+def partition(image_paths, train_ratio, validation_ratio):
     random.shuffle(image_paths)
     total_image_count = len(image_paths)
     train_count = floor(total_image_count * train_ratio)
