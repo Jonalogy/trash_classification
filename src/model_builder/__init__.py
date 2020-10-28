@@ -1,1 +1,1 @@
-from . import RobinMobilenetV2
+from .RobinMobilenetV2 import RobinMobilenetV2
