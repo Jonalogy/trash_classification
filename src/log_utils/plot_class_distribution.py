@@ -33,7 +33,7 @@ def plot_class_distribution(
     plt.xlabel("Class names")
     plt.ylabel("Images count")
     plt.title("Class distribution")
-    plt.xticks(x_pos + 0.25, classes)
+    plt.xticks(ticks=(x_pos + 0.25), labels=classes, rotation=45)
 
     for (color, label, distro) in list_distro:
         plt.bar(x=x_pos, width=bar_width, height=distro, color=color, label=label)
