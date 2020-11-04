@@ -8,7 +8,8 @@ from src.log_utils import extract_truth_and_predictions, plot_confusion_matrix, 
 
 def evaluate_model(
         model: tf.keras.Model,
-        test_ds, class_names: List[str],
+        test_ds,
+        class_names: List[str],
         log_dir: str,
         training_tag: str,
         cm_name: str,
@@ -20,8 +21,9 @@ def evaluate_model(
     ) = extract_truth_and_predictions(model, test_ds)
 
     cm_figure = plot_confusion_matrix(
-        cm=tf.math.confusion_matrix(labels, predictions).numpy(),
-        class_names=class_names
+        confusion_matrix=tf.math.confusion_matrix(labels, predictions).numpy(),
+        class_names=class_names,
+        plot_name=cm_name
     )
 
     logdir = str(log_dir) if isinstance(log_dir, Path) else log_dir
