@@ -18,6 +18,10 @@ def plot_class_distribution(
       valid_distro (array): Validation dataset's distribution
       test_distro (array): Test dataset's distribution
     """
+
+    if len(train_distro) != len(valid_distro) or len(valid_distro) != len(test_distro):
+        raise ValueError('Distributions have different lengths!')
+
     x_pos = np.array([i for i, _ in enumerate(classes)])
     bar_width = 0.25
     list_distro = [
