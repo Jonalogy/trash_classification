@@ -4,3 +4,4 @@ from .log_confusion_matrix import log_confusion_matrix
 from .plot_confusion_matrix import plot_confusion_matrix
 from .log_wrongly_classified_images import log_wrongly_classified_images
 from .plot_class_distribution import plot_class_distribution
+from .log_as_image import log_as_image
