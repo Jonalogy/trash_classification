@@ -4,12 +4,12 @@ from typing import List
 import numpy as np
 
 
-def _autolabel(ax, rects):
+def _autolabel(ax, bars):
     """Attach a text label above each bar in *rects*, displaying its height."""
-    for rect in rects:
-        height = rect.get_height()
+    for bar in bars:
+        height = bar.get_height()
         ax.annotate('{}'.format(height),
-                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xy=(bar.get_x() + bar.get_width() / 2, height),
                     xytext=(0, 3),  # 3 points vertical offset
                     textcoords="offset points",
                     ha='center', va='bottom')
@@ -33,8 +33,8 @@ def plot_class_distribution(
     if len(train_distro) != len(valid_distro) or len(valid_distro) != len(test_distro):
         raise ValueError('Distributions have different lengths!')
 
-    x_pos = np.array([i for i, _ in enumerate(classes)])
-    bar_width = 0.25
+    x_pos = np.array([i * 4 for i, _ in enumerate(classes)])
+    bar_width = 1
     list_distro = [
         ('green', 'train', train_distro),
         ('blue', 'validation', valid_distro),
@@ -46,10 +46,8 @@ def plot_class_distribution(
 
     # Add some text for labels, title and custom x-axis tick labels, etc.
     ax.set_ylabel('Images count')
-    ax.set_title('Scores by group and gender')
     ax.set_xticks(x_pos + bar_width)
     ax.set_xticklabels(classes)
-    ax.legend()
     # set rotation to 45 degrees
 
     bars = []
@@ -61,11 +59,13 @@ def plot_class_distribution(
 
     [_autolabel(ax, bar) for bar in bars]
 
+    ax.legend()
+
     buffer = BytesIO()
 
     y_max = np.amax([*train_distro, *valid_distro, *test_distro])
     plt.ylim(top=y_max + 3) # To add space between the bar annotations and the top of the plot
 
     plt.savefig(buffer, format='png')
-    plt.close()
+    plt.close('all')
     return buffer
