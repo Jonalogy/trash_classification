@@ -4,6 +4,17 @@ from typing import List
 import numpy as np
 
 
+def _autolabel(ax, rects):
+    """Attach a text label above each bar in *rects*, displaying its height."""
+    for rect in rects:
+        height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
+
+
 def plot_class_distribution(
         classes: List[str],
         train_distro: List[int],
@@ -30,18 +41,31 @@ def plot_class_distribution(
         ('red', 'test', test_distro)
     ]
 
-    plt.xlabel("Class names")
-    plt.ylabel("Images count")
-    plt.title("Class distribution")
-    plt.xticks(ticks=(x_pos + 0.25), labels=classes, rotation=45)
+    fig, ax = plt.subplots()
+    plt.xticks(rotation=45)
 
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    ax.set_ylabel('Images count')
+    ax.set_title('Scores by group and gender')
+    ax.set_xticks(x_pos + bar_width)
+    ax.set_xticklabels(classes)
+    ax.legend()
+    # set rotation to 45 degrees
+
+    bars = []
     for (color, label, distro) in list_distro:
-        plt.bar(x=x_pos, width=bar_width, height=distro, color=color, label=label)
+        bars.append(
+            ax.bar(x=x_pos, width=bar_width, height=distro, color=color, label=label)
+        )
         x_pos = x_pos + bar_width
 
-    plt.legend()
+    [_autolabel(ax, bar) for bar in bars]
 
     buffer = BytesIO()
+
+    y_max = np.amax([*train_distro, *valid_distro, *test_distro])
+    plt.ylim(top=y_max + 3) # To add space between the bar annotations and the top of the plot
+
     plt.savefig(buffer, format='png')
     plt.close()
     return buffer
