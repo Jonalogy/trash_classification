@@ -2,3 +2,4 @@ from .split_train_valid_test import split_train_valid_test
 from .create_dir_if_not_exist import create_dir_if_not_exist
 from .get_dataset_distribution import get_dataset_distribution
 from .get_image_count import get_image_count
+from .zip_dir import zip_dir
