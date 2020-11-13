@@ -4,6 +4,7 @@
 mock_*
 scratch_*
 logs/
+!exported/logs
 *data/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
