@@ -4,20 +4,21 @@
 
 This repository holds the code to train ROBin's image classification models.
 
-## What the 
+## What the lab is about
 
-With the help of computer vision, the lab wanted to prototype a smart bin to sort trash based on its material.
+To prototype a smart bin to classify trash based with the help of computer vision. ROBin does with a pair of image classification models to predict the material and items type
 
-## Background
+## Some context during the lab
 
 - Throughout the lab, ROBin's training has only happened with Google Colab to tap on the free GPU.
-- Because Colab is a free resource and company's repository is private, we have to mirror the company repository with a personal github repo in order to fetch the helper and utility methods from the `src` directory within Colab
+- Because Colab is a free resource and company's repository is private, we had to mirror the company repository with a personal github repo in order to fetch the helper and utility methods from the `src` directory within Colab
 
 ## Where to start
 
 ### `robin_train.ipynb`
 
 This notebook acts as the training orchestrator and not the model itself.
+Using it on colab is not mandatory if you have your own GPU.
 
 What is orchestrated:
 
@@ -33,3 +34,6 @@ What is orchestrated:
 ### `view_logs_select_model` 
 
 This notebook is to simulate the scientist downloading a range of training logs and choosing one to deploy.
+
+## Misc
+ * We had a model to identify the presence of trash on the bin tray, but it was scrapped with rule based detection. The previous code can be found at `train_robin_presence.ipynb`
