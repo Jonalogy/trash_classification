@@ -21,7 +21,7 @@ This notebook acts as the training orchestrator and not the model itself.
 
 What is orchestrated:
 
-* Utilities to fetch from mirror repo and Colab
+* Utilities to fetch from mirror repo and Colab if required
 * Allow the distributing of dataset to *train*, *validation* and *test* datasets
 * Visualise class distribution before scientist initiates the training
 * Allow scientist the declare variations of some hyperparameters (Other hyperparams are within the model_builders eg. `RobinMobilenetV2.py` itself)
